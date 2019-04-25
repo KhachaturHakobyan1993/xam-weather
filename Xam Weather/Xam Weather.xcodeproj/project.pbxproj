@@ -8,12 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		E2BCFE5E2270CAF30001412E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE5D2270CAF30001412E /* AppDelegate.swift */; };
-		E2BCFE602270CAF30001412E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE5F2270CAF30001412E /* ViewController.swift */; };
+		E2BCFE602270CAF30001412E /* WeatherOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE5F2270CAF30001412E /* WeatherOverviewViewController.swift */; };
 		E2BCFE632270CAF30001412E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCFE612270CAF30001412E /* Main.storyboard */; };
 		E2BCFE652270CAFD0001412E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2BCFE642270CAFD0001412E /* Assets.xcassets */; };
 		E2BCFE682270CAFD0001412E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2BCFE662270CAFD0001412E /* LaunchScreen.storyboard */; };
 		E2BCFE732270CAFD0001412E /* Xam_WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE722270CAFD0001412E /* Xam_WeatherTests.swift */; };
 		E2BCFE7E2270CAFD0001412E /* Xam_WeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE7D2270CAFD0001412E /* Xam_WeatherUITests.swift */; };
+		E2BCFE902270E3D50001412E /* WeatherOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE8F2270E3D50001412E /* WeatherOverview.swift */; };
+		E2BCFE922270E7EF0001412E /* CLLocation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE912270E7EF0001412E /* CLLocation+Extension.swift */; };
+		E2BCFE942270F1D80001412E /* ApplePlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE932270F1D80001412E /* ApplePlacesViewController.swift */; };
+		E2BCFE962270F30A0001412E /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE952270F30A0001412E /* UIViewController+Extension.swift */; };
+		E2BCFE982270F55A0001412E /* MKLocalSearchCompletion+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE972270F55A0001412E /* MKLocalSearchCompletion+Extension.swift */; };
+		E2BCFE9E2271A3370001412E /* SearchButtonContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2BCFE9D2271A3370001412E /* SearchButtonContainer.xib */; };
+		E2BCFEA12271A36D0001412E /* SearchButtonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFE9F2271A36D0001412E /* SearchButtonContainer.swift */; };
+		E2BCFEA22271A36D0001412E /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEA02271A36D0001412E /* SearchButton.swift */; };
+		E2BCFEA52271A42F0001412E /* NibBasedCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEA42271A42F0001412E /* NibBasedCustomView.swift */; };
+		E2BCFEA72271A45E0001412E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEA62271A45E0001412E /* NibLoadable.swift */; };
+		E2BCFEA92271AB6B0001412E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEA82271AB6B0001412E /* MapViewController.swift */; };
+		E2BCFEAB2271AD6A0001412E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAA2271AD6A0001412E /* City.swift */; };
+		E2BCFEAD2271D48E0001412E /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAC2271D48E0001412E /* UIAlertController+Extension.swift */; };
+		E2BCFEAF2271DCF40001412E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAE2271DCF40001412E /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +50,7 @@
 /* Begin PBXFileReference section */
 		E2BCFE5A2270CAF30001412E /* Xam Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Xam Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BCFE5D2270CAF30001412E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E2BCFE5F2270CAF30001412E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E2BCFE5F2270CAF30001412E /* WeatherOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOverviewViewController.swift; sourceTree = "<group>"; };
 		E2BCFE622270CAF30001412E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2BCFE642270CAFD0001412E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2BCFE672270CAFD0001412E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +61,20 @@
 		E2BCFE792270CAFD0001412E /* Xam WeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Xam WeatherUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2BCFE7D2270CAFD0001412E /* Xam_WeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xam_WeatherUITests.swift; sourceTree = "<group>"; };
 		E2BCFE7F2270CAFD0001412E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2BCFE8F2270E3D50001412E /* WeatherOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOverview.swift; sourceTree = "<group>"; };
+		E2BCFE912270E7EF0001412E /* CLLocation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extension.swift"; sourceTree = "<group>"; };
+		E2BCFE932270F1D80001412E /* ApplePlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePlacesViewController.swift; sourceTree = "<group>"; };
+		E2BCFE952270F30A0001412E /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		E2BCFE972270F55A0001412E /* MKLocalSearchCompletion+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKLocalSearchCompletion+Extension.swift"; sourceTree = "<group>"; };
+		E2BCFE9D2271A3370001412E /* SearchButtonContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchButtonContainer.xib; sourceTree = "<group>"; };
+		E2BCFE9F2271A36D0001412E /* SearchButtonContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchButtonContainer.swift; sourceTree = "<group>"; };
+		E2BCFEA02271A36D0001412E /* SearchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
+		E2BCFEA42271A42F0001412E /* NibBasedCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibBasedCustomView.swift; sourceTree = "<group>"; };
+		E2BCFEA62271A45E0001412E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		E2BCFEA82271AB6B0001412E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E2BCFEAA2271AD6A0001412E /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		E2BCFEAC2271D48E0001412E /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		E2BCFEAE2271DCF40001412E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +126,11 @@
 			isa = PBXGroup;
 			children = (
 				E2BCFE5D2270CAF30001412E /* AppDelegate.swift */,
-				E2BCFE5F2270CAF30001412E /* ViewController.swift */,
-				E2BCFE612270CAF30001412E /* Main.storyboard */,
-				E2BCFE642270CAFD0001412E /* Assets.xcassets */,
-				E2BCFE662270CAFD0001412E /* LaunchScreen.storyboard */,
-				E2BCFE692270CAFD0001412E /* Info.plist */,
+				E2BCFE992270FD440001412E /* Utilities */,
+				E2BCFE8B2270E3480001412E /* Models */,
+				E2BCFE8C2270E3570001412E /* ViewControllers */,
+				E2BCFE9B2271A2B40001412E /* Views */,
+				E2BCFE8E2270E38E0001412E /* Resources */,
 			);
 			path = "Xam Weather";
 			sourceTree = "<group>";
@@ -123,6 +151,92 @@
 				E2BCFE7F2270CAFD0001412E /* Info.plist */,
 			);
 			path = "Xam WeatherUITests";
+			sourceTree = "<group>";
+		};
+		E2BCFE8B2270E3480001412E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE8F2270E3D50001412E /* WeatherOverview.swift */,
+				E2BCFEAA2271AD6A0001412E /* City.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E2BCFE8C2270E3570001412E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE5F2270CAF30001412E /* WeatherOverviewViewController.swift */,
+				E2BCFE932270F1D80001412E /* ApplePlacesViewController.swift */,
+				E2BCFEA82271AB6B0001412E /* MapViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E2BCFE8D2270E3770001412E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE612270CAF30001412E /* Main.storyboard */,
+				E2BCFE662270CAFD0001412E /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		E2BCFE8E2270E38E0001412E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE642270CAFD0001412E /* Assets.xcassets */,
+				E2BCFE692270CAFD0001412E /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E2BCFE992270FD440001412E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFEA32271A4040001412E /* Helpers */,
+				E2BCFE9A2270FD4C0001412E /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E2BCFE9A2270FD4C0001412E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE912270E7EF0001412E /* CLLocation+Extension.swift */,
+				E2BCFEAC2271D48E0001412E /* UIAlertController+Extension.swift */,
+				E2BCFE952270F30A0001412E /* UIViewController+Extension.swift */,
+				E2BCFE972270F55A0001412E /* MKLocalSearchCompletion+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E2BCFE9B2271A2B40001412E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE9C2271A2C40001412E /* Views Collection */,
+				E2BCFE8D2270E3770001412E /* Storyboards */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E2BCFE9C2271A2C40001412E /* Views Collection */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFE9D2271A3370001412E /* SearchButtonContainer.xib */,
+				E2BCFE9F2271A36D0001412E /* SearchButtonContainer.swift */,
+				E2BCFEA02271A36D0001412E /* SearchButton.swift */,
+			);
+			path = "Views Collection";
+			sourceTree = "<group>";
+		};
+		E2BCFEA32271A4040001412E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E2BCFEA42271A42F0001412E /* NibBasedCustomView.swift */,
+				E2BCFEA62271A45E0001412E /* NibLoadable.swift */,
+				E2BCFEAE2271DCF40001412E /* Reachability.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +346,7 @@
 				E2BCFE682270CAFD0001412E /* LaunchScreen.storyboard in Resources */,
 				E2BCFE652270CAFD0001412E /* Assets.xcassets in Resources */,
 				E2BCFE632270CAF30001412E /* Main.storyboard in Resources */,
+				E2BCFE9E2271A3370001412E /* SearchButtonContainer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +371,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2BCFE602270CAF30001412E /* ViewController.swift in Sources */,
+				E2BCFE962270F30A0001412E /* UIViewController+Extension.swift in Sources */,
+				E2BCFEA52271A42F0001412E /* NibBasedCustomView.swift in Sources */,
+				E2BCFE942270F1D80001412E /* ApplePlacesViewController.swift in Sources */,
+				E2BCFE602270CAF30001412E /* WeatherOverviewViewController.swift in Sources */,
+				E2BCFEA12271A36D0001412E /* SearchButtonContainer.swift in Sources */,
+				E2BCFEA72271A45E0001412E /* NibLoadable.swift in Sources */,
+				E2BCFE982270F55A0001412E /* MKLocalSearchCompletion+Extension.swift in Sources */,
+				E2BCFEA92271AB6B0001412E /* MapViewController.swift in Sources */,
+				E2BCFEAF2271DCF40001412E /* Reachability.swift in Sources */,
+				E2BCFEAD2271D48E0001412E /* UIAlertController+Extension.swift in Sources */,
+				E2BCFE922270E7EF0001412E /* CLLocation+Extension.swift in Sources */,
+				E2BCFE902270E3D50001412E /* WeatherOverview.swift in Sources */,
 				E2BCFE5E2270CAF30001412E /* AppDelegate.swift in Sources */,
+				E2BCFEAB2271AD6A0001412E /* City.swift in Sources */,
+				E2BCFEA22271A36D0001412E /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +561,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Xam Weather/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Xam Weather/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -450,7 +578,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "Xam Weather/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Xam Weather/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
