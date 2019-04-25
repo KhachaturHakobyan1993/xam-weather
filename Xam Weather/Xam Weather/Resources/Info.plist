@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>“Your speech will be detected after tapping the recording button.”</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>“Speak and watch your words become text.”</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Xam Weather will always access your location to see weather.</string>
+	<string>“Xam Weather will always access your location to see weather.”</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Xam Weather will access your location only when you use the app to see weather.</string>
+	<string>“Xam Weather will access your location only when you use the app to see weather.”</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

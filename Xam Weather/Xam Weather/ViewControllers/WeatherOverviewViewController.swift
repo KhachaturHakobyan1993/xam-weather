@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 fileprivate enum CitySelectionOption {
+	case speech(cityName: String)
 	case current(city: City)
 	case map(city: City)
 	case autocomplete(city: City)
@@ -17,6 +18,7 @@ fileprivate enum CitySelectionOption {
 	
 	var cityName: String {
 		switch self {
+		case let .speech(cityName): return cityName
 		case let .current(city): return city.name
 		case let .map(city): return city.name
 		case let .autocomplete(city): return city.name
@@ -26,6 +28,7 @@ fileprivate enum CitySelectionOption {
 	
 	var isCurrent: Bool {
 		switch self {
+		case .speech(_): return false
 		case .current(_): return true
 		case .map(_): return false
 		case .autocomplete(_): return false
@@ -35,9 +38,11 @@ fileprivate enum CitySelectionOption {
 }
 
 class WeatherOverviewViewController: UIViewController {
+	@IBOutlet private weak var recordingBarButton: UIBarButtonItem!
 	@IBOutlet private weak var currentLocationBarButton: UIBarButtonItem!
 	@IBOutlet private weak var mapBarButton: UIBarButtonItem!
 	@IBOutlet private weak var searchButtonContainer: SearchButtonContainer!
+	private let recordingController = RecordingController()
 	private let locationManager = CLLocationManager()
 	private var clAuthorizationStatus: CLAuthorizationStatus = .notDetermined
 	private var currentCity: City?
@@ -69,9 +74,20 @@ class WeatherOverviewViewController: UIViewController {
 	
 	// MARK: - Methods -
 	
+	private func showApplicationSettings() {
+		guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+		UIApplication.shared.open(url, options: [:], completionHandler: nil)
+	}
+	
+	private func showWeatherOverviewForRecognizedSpeech() {
+		self.recordingController.delegate = self
+		self.recordingController.requestAuthorizationAndRecording()
+	}
+	
 	private func showWeatherOverviewForCurrentCity() {
 		guard !self.citySelcetion.isCurrent,
 			self.clAuthorizationStatus != .denied else {
+				self.showApplicationSettings()
 				return
 		}
 		guard let currentCity = self.currentCity else {
@@ -93,9 +109,9 @@ class WeatherOverviewViewController: UIViewController {
 		self.navigationController?.pushViewController(mapViewController, animated: true)
 	}
 	
-	
 	private func updateCitySelectionOption() {
 		switch self.citySelcetion {
+		case let .speech(cityName): self.fetchWeatherOverview(cityName)
 		case let .current(city): self.fetchWeatherOverview(city.name)
 		case let .map(city): self.fetchWeatherOverview(city.name)
 		case let .autocomplete(city): self.fetchWeatherOverview(city.name)
@@ -104,11 +120,13 @@ class WeatherOverviewViewController: UIViewController {
 	}
 	
 	private func updateCitySelectionOptionUI() {
+		self.recordingBarButton.image = #imageLiteral(resourceName: "imageRecordingOff")
 		self.currentLocationBarButton.image = #imageLiteral(resourceName: "imageMyLocationOff")
 		self.mapBarButton.image = #imageLiteral(resourceName: "imageMapOff")
 		self.searchButtonContainer.setSearchImage(#imageLiteral(resourceName: "imageSearchOff"))
 		self.searchButtonContainer.updateSearchTitle(self.citySelcetion.cityName)
 		switch self.citySelcetion {
+		case .speech(_): self.recordingBarButton.image = #imageLiteral(resourceName: "imageRecordingOn")
 		case .current(_): self.currentLocationBarButton.image = #imageLiteral(resourceName: "imageMyLocationOn")
 		case .map(_): self.mapBarButton.image = #imageLiteral(resourceName: "imageMapOn")
 		case .autocomplete(_): self.searchButtonContainer.setSearchImage(#imageLiteral(resourceName: "imageSearchOn"))
@@ -138,6 +156,10 @@ class WeatherOverviewViewController: UIViewController {
 	
 	
 	// MARK: - Methods IBActions -
+	
+	@IBAction func recordingBarButtonTapped(_ sender: UIBarButtonItem) {
+		self.showWeatherOverviewForRecognizedSpeech()
+	}
 	
 	@IBAction func currentBarButtonTapped(_ sender: UIBarButtonItem) {
 		self.showWeatherOverviewForCurrentCity()
@@ -201,3 +223,21 @@ extension WeatherOverviewViewController: MapViewControllerDelegate {
 	}
 }
 
+
+// MARK: - RecordingControllerDelegate -
+
+extension WeatherOverviewViewController: RecordingControllerDelegate {
+	func didRecognizeSpeech(_ result: String) {
+		guard !result.isEmpty else { return }
+		self.citySelcetion = .speech(cityName: result)
+		print(result)
+	}
+	
+	func didFail(_ title: String, _ message: String) {
+		self.showAlert(title, message, completion: nil)
+	}
+	
+	func didDenyAuthorization() {
+		self.showApplicationSettings()
+	}
+}

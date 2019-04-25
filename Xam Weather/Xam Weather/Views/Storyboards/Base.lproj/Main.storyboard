@@ -48,6 +48,11 @@
                         <viewLayoutGuide key="safeArea" id="aAA-IX-l7s"/>
                     </view>
                     <navigationItem key="navigationItem" id="Rio-UP-ggA">
+                        <barButtonItem key="leftBarButtonItem" image="imageRecordingOff" id="k1J-Um-10p">
+                            <connections>
+                                <action selector="recordingBarButtonTapped:" destination="BYZ-38-t0r" id="trT-zU-UhU"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="imageMyLocationOff" id="eoy-8s-QsX">
                                 <inset key="imageInsets" minX="0.0" minY="0.0" maxX="-10" maxY="0.0"/>
@@ -68,6 +73,7 @@
                     <connections>
                         <outlet property="currentLocationBarButton" destination="eoy-8s-QsX" id="YGg-WF-9mC"/>
                         <outlet property="mapBarButton" destination="E2J-Yj-3Xk" id="uzt-Mg-vvv"/>
+                        <outlet property="recordingBarButton" destination="k1J-Um-10p" id="QJc-0y-M4J"/>
                         <outlet property="searchButtonContainer" destination="asC-SX-wgK" id="TsU-Gs-daY"/>
                     </connections>
                 </viewController>
@@ -273,6 +279,7 @@
     <resources>
         <image name="imageMapOff" width="37.5" height="37.5"/>
         <image name="imageMyLocationOff" width="37.5" height="37.5"/>
+        <image name="imageRecordingOff" width="37.5" height="37.5"/>
         <namedColor name="NavigationBarBackground">
             <color name="ibMissingResourceColor" catalog="#$assets-com.apple.dt.DVTKit" colorSpace="catalog"/>
         </namedColor>
