@@ -25,13 +25,13 @@ struct WeatherOverview: Codable {
 
 extension WeatherOverview {
 	static func fetchWeatherOverview(_ city: String,
-									 _ completion: @escaping (_ weatherOverview: WeatherOverview) -> Void) {
+									 _ completion: @escaping (_ weatherOverview: WeatherOverview?) -> Void) {
 		let urlString = "https://samples.openweathermap.org/data/2.5/weather?q=\(city),uk&appid=b6907d289e10d714a6e88b30761fae22"
-		let url = URL(string: urlString)!
+		guard let url = URL(string: urlString) else { completion(nil); return }
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
-			guard let data = data, error == nil else { return }
+			guard let data = data, error == nil else { completion(nil); return }
 			let jsonDecoder = JSONDecoder()
-			guard let weatherOverview = try? jsonDecoder.decode(WeatherOverview.self, from: data) else { return }
+			guard let weatherOverview = try? jsonDecoder.decode(WeatherOverview.self, from: data) else { completion(nil); return }
 			DispatchQueue.main.async {
 				completion(weatherOverview)
 			}

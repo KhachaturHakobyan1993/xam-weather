@@ -9,11 +9,13 @@
 import CoreLocation
 
 extension CLLocation {
-	func getCity(_ completion: @escaping ((_ city: String?) -> Void)) {
+	func getCity(_ completion: @escaping ((_ city: City?) -> Void)) {
 		let ceo = CLGeocoder()
 		ceo.reverseGeocodeLocation(self) { (placemarks, error) in
 			guard let placemark = placemarks?.first,
-				let city = placemark.locality else { completion(nil); return }
+				let cityName = placemark.locality,
+			let location = placemark.location else { completion(nil); return }
+			let city = City.init(name: cityName, location: location)
 			completion(city)
 		}
 	}

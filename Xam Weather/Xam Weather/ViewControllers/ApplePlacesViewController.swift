@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol ApplePlacesViewControllerDelegate: NSObjectProtocol {
-	func didTapCity(city: String)
+	func didSelectCity(city: City)
 }
 
 class ApplePlacesViewController: UIViewController {
@@ -86,7 +86,7 @@ extension ApplePlacesViewController: UITableViewDataSource, UITableViewDelegate 
 				self.showAlert("City not found!", completion: nil)
 				return
 			}
-			self.delegate?.didTapCity(city: city)
+			self.delegate?.didSelectCity(city: city)
 			self.view.endEditing(true)
 			self.dismiss(animated: true, completion: nil)
 		}
