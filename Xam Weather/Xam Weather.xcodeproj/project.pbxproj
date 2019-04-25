@@ -28,6 +28,7 @@
 		E2BCFEAB2271AD6A0001412E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAA2271AD6A0001412E /* City.swift */; };
 		E2BCFEAD2271D48E0001412E /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAC2271D48E0001412E /* UIAlertController+Extension.swift */; };
 		E2BCFEAF2271DCF40001412E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BCFEAE2271DCF40001412E /* Reachability.swift */; };
+		E2E544E522722CB900D109F0 /* RecordingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E544E422722CB900D109F0 /* RecordingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		E2BCFEAA2271AD6A0001412E /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E2BCFEAC2271D48E0001412E /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
 		E2BCFEAE2271DCF40001412E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		E2E544E422722CB900D109F0 /* RecordingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				E2BCFEA42271A42F0001412E /* NibBasedCustomView.swift */,
 				E2BCFEA62271A45E0001412E /* NibLoadable.swift */,
 				E2BCFEAE2271DCF40001412E /* Reachability.swift */,
+				E2E544E422722CB900D109F0 /* RecordingController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				E2BCFE942270F1D80001412E /* ApplePlacesViewController.swift in Sources */,
 				E2BCFE602270CAF30001412E /* WeatherOverviewViewController.swift in Sources */,
 				E2BCFEA12271A36D0001412E /* SearchButtonContainer.swift in Sources */,
+				E2E544E522722CB900D109F0 /* RecordingController.swift in Sources */,
 				E2BCFEA72271A45E0001412E /* NibLoadable.swift in Sources */,
 				E2BCFE982270F55A0001412E /* MKLocalSearchCompletion+Extension.swift in Sources */,
 				E2BCFEA92271AB6B0001412E /* MapViewController.swift in Sources */,
@@ -561,7 +565,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9XVC79337;
 				INFOPLIST_FILE = "$(SRCROOT)/Xam Weather/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,7 +584,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H9XVC79337;
 				INFOPLIST_FILE = "$(SRCROOT)/Xam Weather/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

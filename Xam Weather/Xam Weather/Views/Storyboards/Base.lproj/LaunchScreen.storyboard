@@ -22,8 +22,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Xam Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-gw-k2W">
-                                <rect key="frame" x="16" y="60" width="288" height="60"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="50"/>
+                                <rect key="frame" x="16" y="43.5" width="288" height="93"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="58"/>
                                 <color key="textColor" red="0.48817980289459229" green="0.76613432168960571" blue="0.90198516845703125" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
