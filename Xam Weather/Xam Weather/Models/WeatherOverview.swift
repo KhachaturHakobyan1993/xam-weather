@@ -6,28 +6,24 @@
 //  Copyright © 2019 Khachatur Hakobyan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct WeatherOverview: Codable {
-	let coord: Coord
-	let weather: [Weather]
-	let base: String
-	let main: Main
-	let visibility: Int
-	let wind: Wind
-	let clouds: Clouds
-	let dt: Int
-	let sys: Sys
-	let id: Int
-	let name: String
-	let cod: Int
+	let cod: String
+	let message: Double
+	let cnt: Int
+	let list: [List]
+	let city: WeatherCity
 }
 
 extension WeatherOverview {
 	static func fetchWeatherOverview(_ city: String,
 									 _ completion: @escaping (_ weatherOverview: WeatherOverview?) -> Void) {
-		let urlString = "https://samples.openweathermap.org/data/2.5/weather?q=\(city),uk&appid=b6907d289e10d714a6e88b30761fae22"
+		guard let isWeatherCity = WeatherCity.allCities.first(where: {$0.name.lowercased().contains(city.lowercased())}) else { completion(nil); return  }
+		let apiKey = "9e7f2aaea74d96e5be0233be8babd9da"
+		let urlString = "https://samples.openweathermap.org/data/2.5/forecast?id=\(isWeatherCity.id)&appid=\(apiKey)"
 		guard let url = URL(string: urlString) else { completion(nil); return }
+		
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
 			guard let data = data, error == nil else { completion(nil); return }
 			let jsonDecoder = JSONDecoder()
@@ -39,39 +35,83 @@ extension WeatherOverview {
 	}
 }
 
+
+struct List: Codable {
+	let dt: Int
+	let main: MainClass
+	let weather: [Weather]
+	let clouds: Clouds
+	let wind: Wind
+	let snow: Snow
+	let sys: Sys
+	let dtTxt: String
+	
+	enum CodingKeys: String, CodingKey {
+		case dt, main, weather, clouds, wind, snow, sys
+		case dtTxt = "dt_txt"
+	}
+}
+
 struct Clouds: Codable {
 	let all: Int
 }
 
-struct Coord: Codable {
-	let lon, lat: Double
-}
-
-struct Main: Codable {
-	let temp: Double
-	let pressure, humidity: Int
-	let tempMin, tempMax: Double
+struct MainClass: Codable {
+	let temp, tempMin, tempMax, pressure: Double
+	let seaLevel, grndLevel: Double
+	let humidity: Int
+	let tempKf: Double
 	
 	enum CodingKeys: String, CodingKey {
-		case temp, pressure, humidity
+		case temp
 		case tempMin = "temp_min"
 		case tempMax = "temp_max"
+		case pressure
+		case seaLevel = "sea_level"
+		case grndLevel = "grnd_level"
+		case humidity
+		case tempKf = "temp_kf"
+	}
+}
+
+struct Snow: Codable {
+	let the3H: Double?
+	
+	enum CodingKeys: String, CodingKey {
+		case the3H = "3h"
 	}
 }
 
 struct Sys: Codable {
-	let type, id: Int
-	let message: Double
-	let country: String
-	let sunrise, sunset: Int
+	let pod: Pod
+}
+
+enum Pod: String, Codable {
+	case d = "d"
+	case n = "n"
 }
 
 struct Weather: Codable {
 	let id: Int
-	let main, description, icon: String
+	let main: MainEnum
+	let description: Description
+	let icon: String
+}
+
+enum Description: String, Codable {
+	case brokenClouds = "broken clouds"
+	case clearSky = "clear sky"
+	case fewClouds = "few clouds"
+	case lightSnow = "light snow"
+	case scatteredClouds = "scattered clouds"
+}
+
+enum MainEnum: String, Codable {
+	case clear = "Clear"
+	case clouds = "Clouds"
+	case snow = "Snow"
 }
 
 struct Wind: Codable {
-	let speed: Double
-	let deg: Int
+	let speed, deg: Double
 }
