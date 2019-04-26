@@ -48,6 +48,9 @@
 		E2C4399D227309DE002B832B /* ExtendedDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C4399C227309DE002B832B /* ExtendedDetailCell.swift */; };
 		E2C439A722731662002B832B /* WeatherOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C439A622731662002B832B /* WeatherOverviewViewModel.swift */; };
 		E2C439A922731AE2002B832B /* NSMutableAttribuedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C439A822731AE2002B832B /* NSMutableAttribuedString+Extension.swift */; };
+		E2D16AFD227340E900AF99B1 /* WeatherFormatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D16AFC227340E900AF99B1 /* WeatherFormatable.swift */; };
+		E2D16AFF2273582500AF99B1 /* WeatherCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D16AFE2273582500AF99B1 /* WeatherCity.swift */; };
+		E2D16B01227359F300AF99B1 /* WeatherCityDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D16B00227359F300AF99B1 /* WeatherCityDocument.swift */; };
 		E2E544E522722CB900D109F0 /* RecordingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E544E422722CB900D109F0 /* RecordingController.swift */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +119,9 @@
 		E2C4399C227309DE002B832B /* ExtendedDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedDetailCell.swift; sourceTree = "<group>"; };
 		E2C439A622731662002B832B /* WeatherOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherOverviewViewModel.swift; sourceTree = "<group>"; };
 		E2C439A822731AE2002B832B /* NSMutableAttribuedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttribuedString+Extension.swift"; sourceTree = "<group>"; };
+		E2D16AFC227340E900AF99B1 /* WeatherFormatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFormatable.swift; sourceTree = "<group>"; };
+		E2D16AFE2273582500AF99B1 /* WeatherCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCity.swift; sourceTree = "<group>"; };
+		E2D16B00227359F300AF99B1 /* WeatherCityDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCityDocument.swift; sourceTree = "<group>"; };
 		E2E544E422722CB900D109F0 /* RecordingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +207,8 @@
 				E2BCFE8F2270E3D50001412E /* WeatherOverview.swift */,
 				E2C439A622731662002B832B /* WeatherOverviewViewModel.swift */,
 				E2BCFEAA2271AD6A0001412E /* City.swift */,
+				E2D16AFE2273582500AF99B1 /* WeatherCity.swift */,
+				E2D16B00227359F300AF99B1 /* WeatherCityDocument.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -280,6 +288,7 @@
 			children = (
 				E2BCFEA42271A42F0001412E /* NibBasedCustomView.swift */,
 				E2BCFEA62271A45E0001412E /* NibLoadable.swift */,
+				E2D16AFC227340E900AF99B1 /* WeatherFormatable.swift */,
 				E2BCFEAE2271DCF40001412E /* Reachability.swift */,
 				E2E544E422722CB900D109F0 /* RecordingController.swift */,
 				E2C4397A2272E4BE002B832B /* WeatherCollectionViewFlowLayout.swift */,
@@ -520,8 +529,11 @@
 				E2C4397D2272E758002B832B /* WeatherController.swift in Sources */,
 				E2C439832272EFF1002B832B /* WeatherTopHeaderCell.swift in Sources */,
 				E2BCFEA92271AB6B0001412E /* MapViewController.swift in Sources */,
+				E2D16AFD227340E900AF99B1 /* WeatherFormatable.swift in Sources */,
+				E2D16AFF2273582500AF99B1 /* WeatherCity.swift in Sources */,
 				E2BCFEAF2271DCF40001412E /* Reachability.swift in Sources */,
 				E2C4399922730488002B832B /* DailyWeatherCell.swift in Sources */,
+				E2D16B01227359F300AF99B1 /* WeatherCityDocument.swift in Sources */,
 				E2C439912272F788002B832B /* WeatherSecondHeaderCell.swift in Sources */,
 				E2BCFEAD2271D48E0001412E /* UIAlertController+Extension.swift in Sources */,
 				E2C439812272EC44002B832B /* WeatherCell.swift in Sources */,

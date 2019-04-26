@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VerticalWeatherCell: UICollectionViewCell {
+class VerticalWeatherCell: UICollectionViewCell, WeatherFormatable {
 	
 	let hourLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 18))
@@ -27,16 +27,13 @@ class VerticalWeatherCell: UICollectionViewCell {
 		return iv
 	}()
 	
-	 var datasourceItem: Any? {
+	var datasourceItem: List! {
 		didSet {
-//			guard let weatherHourly = datasourceItem as? WeatherHourly else {
-//				return
-//			}
-//			hourLabel.text = weatherHourly.hour
-//			temperatureLabel.text = addDegreeSign(toNumber: weatherHourly.temperature ?? 0)
-//			if let imageIconName = weatherHourly.description?.stringValue {
-//				weatherIcon.image = UIImage(named: imageIconName)
-//			}
+			self.setupViews()
+			self.hourLabel.text = self.getHour(dateString: self.datasourceItem.dtTxt)
+			self.temperatureLabel.text = self.getTemperature(temp: self.datasourceItem.main.temp)
+			guard let weather = self.datasourceItem.weather.first else { return }
+			self.weatherIcon.image = self.getWeatherIcon(description: weather.description, pod: self.datasourceItem.sys.pod)
 		}
 	}
 	

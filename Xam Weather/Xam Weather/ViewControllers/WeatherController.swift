@@ -50,7 +50,7 @@ class WeatherController: UIViewController {
 	// MARK: - Methods Setup -
 
 	private func setupActivityIndicator() {
-		self.view.addSubview(activityIndicatorView)
+		self.view.addSubview(self.activityIndicatorView)
 		self.activityIndicatorView.anchorCenterXToSuperview()
 		self.activityIndicatorView.anchorCenterYToSuperview()
 	}
@@ -63,7 +63,7 @@ class WeatherController: UIViewController {
 	}
 	
 	private func setupCollectionView() {
-		//self.collectionView.collectionViewLayout = WeatherCollectionViewFlowLayout()
+		self.collectionView.collectionViewLayout = WeatherCollectionViewFlowLayout()
 		self.collectionView.backgroundView = self.backgroundImageView
 		self.collectionView.showsVerticalScrollIndicator = false
 		self.collectionView.alwaysBounceVertical = true
@@ -104,12 +104,12 @@ extension WeatherController: UICollectionViewDataSource {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return self.cells.count
+		return (section == WeatherHeaders.topHeader.section ? 0 : self.cells.count)
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(WeatherCell.self), for: indexPath) as? WeatherCell else { return UICollectionViewCell() }
-		cell.backgroundColor = .red
+		cell.backgroundColor = UIColor(named: "lightBlue")!
 		return cell
 	}
 	
@@ -124,7 +124,7 @@ extension WeatherController: UICollectionViewDataSource {
 			reusableView = topHeaderCell
 		case WeatherHeaders.centerHeader.section:
 			guard let secondHeaderCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NSStringFromClass(WeatherSecondHeaderCell.self), for: indexPath) as? WeatherSecondHeaderCell else { return reusableView }
-			secondHeaderCell.datasourceItem = self.weatherOverview
+			secondHeaderCell.datasourceItem = self.weatherOverview.list
 			reusableView = secondHeaderCell
 		default: break
 		}
@@ -141,11 +141,9 @@ extension WeatherController: UICollectionViewDelegateFlowLayout {
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-		var height: CGFloat = WeatherHeaders.topHeader.defaultHeight
-		if section != WeatherHeaders.topHeader.section {
-			height = WeatherHeaders.centerHeader.defaultHeight
-		}
-		return CGSize(width:view.frame.width, height: height)
+		let topHeaderSize = CGSize(width:view.frame.width, height: WeatherHeaders.topHeader.defaultHeight)
+		let secondHeaderSize = CGSize(width:view.frame.width, height: WeatherHeaders.centerHeader.defaultHeight)
+		return (section == WeatherHeaders.topHeader.section ? topHeaderSize : secondHeaderSize)
 	}
 }
 

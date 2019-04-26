@@ -76,6 +76,7 @@ class MapViewController: UIViewController {
 		let tapPoint = self.mapView.convert(point, toCoordinateFrom: self.mapView)
 		let location = CLLocation(latitude: tapPoint.latitude, longitude: tapPoint.longitude)
 		location.getCity { (city) in
+			guard let city = city else { return }
 			self.selectedCity = city
 			let annotation = MKPointAnnotation()
 			annotation.coordinate = tapPoint
@@ -104,11 +105,10 @@ class MapViewController: UIViewController {
 	// MARK: - Methods IBActions -
 	
 	@IBAction private func doneButtonTapped(_ sender: UIButton) {
-		self.delegate?.didSelectCity(self.selectedCity)
 		self.navigationController?.popViewController(animated: true)
+		self.delegate?.didSelectCity(self.selectedCity)
 	}
 }
-
 
 
 // MARK: - UIGestureRecognizerDelegate -

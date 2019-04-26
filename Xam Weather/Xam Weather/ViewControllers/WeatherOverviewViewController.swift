@@ -62,6 +62,7 @@ class WeatherOverviewViewController: WeatherController {
 
 	private func setup() {
 		self.searchButtonContainer.delegate = self
+		_ = WeatherCity.allCities
 	}
 	
 	private func requestCurrentLocation() {
@@ -175,8 +176,6 @@ class WeatherOverviewViewController: WeatherController {
 		self.showMapViewController()
 	}
 }
-
-
 
 
 // MARK: - CLLocationManagerDelegate -

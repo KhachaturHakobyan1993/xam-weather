@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct WeatherOverviewViewModel {
+struct WeatherOverviewViewModel: WeatherFormatable {
 	
 	private var weatherOverView: WeatherOverview!
 	
@@ -18,8 +18,8 @@ struct WeatherOverviewViewModel {
 	}
 	
 	var cityAndDescriptionAttributedString: NSMutableAttributedString? {
-		let cityName = weatherOverView.name
-		let weatherDescription = weatherOverView.weather.first?.main.capitalized ?? "--"
+		let cityName = self.weatherOverView.city.name
+		let weatherDescription = self.weatherOverView.list.first?.weather.first?.description.rawValue.capitalized ?? "--"
 		
 		let attributedString = NSMutableAttributedString.setupWithText(cityName, description: "\n" + weatherDescription, textFont: UIFont.systemFont(ofSize: 34), descriptionFont: UIFont.systemFont(ofSize: 16), textColor: UIColor.white, descriptionColor: UIColor.white)
 		attributedString?.centerAlignWithSpacing(1.0)
@@ -27,22 +27,30 @@ struct WeatherOverviewViewModel {
 	}
 	
 	var lowTemperature: String {
-		let temperature = weatherOverView.main.tempMin
-		return "\(temperature)"
+		guard let temperature = self.weatherOverView.list.first?.main.tempMin else { return "-"}
+		let celsius = self.getCelsius(kelvin: temperature)
+		return "\(celsius)"
 	}
 	
 	var highTemperature: String {
-		let temperature = weatherOverView.main.tempMax
-		return "\(temperature)"
+		guard let temperature = self.weatherOverView.list.first?.main.tempMax else { return "-"}
+		let celsius = self.getCelsius(kelvin: temperature)
+		return "\(celsius)"
 	}
 	
 	var weekDay: String {
-		//let weekDayText = weatherOverView?.weekDay ?? "--"
 		return "\("Monday")  Today"
 	}
 	
 	var temperature: String {
-		let temperature = weatherOverView.main.temp
-		return "\(temperature)°"
+		guard let temperature = self.weatherOverView.list.first?.main.temp else { return "-"}
+		let celsius = self.getCelsius(kelvin: temperature)
+		return "\(celsius)°"
+	}
+	
+	var lists: [List] {
+		guard self.weatherOverView.list.count >= 12 else { return self.weatherOverView.list }
+		let lists = Array(self.weatherOverView.list[0..<12])
+		return lists
 	}
 }

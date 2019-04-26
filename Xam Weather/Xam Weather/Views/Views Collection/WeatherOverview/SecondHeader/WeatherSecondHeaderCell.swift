@@ -17,20 +17,18 @@ class WeatherSecondHeaderCell: UICollectionViewCell {
 		let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		cv.backgroundColor = .clear
 		cv.showsHorizontalScrollIndicator = false
+		cv.dataSource = self
 		cv.delegate = self
+		cv.register(VerticalWeatherCell.self, forCellWithReuseIdentifier: NSStringFromClass(VerticalWeatherCell.self))
 		return cv
 	}()
 	
 	let topSeparator = SeparationLineView()
 	let bottomSeparator = SeparationLineView()
 	
-	 var datasourceItem: Any? {
+	 var datasourceItem: [List]! {
 		didSet{
-//			guard let weatherHourly = datasourceItem as? [WeatherHourly] else {
-//				return
-//			}
-//			let datasource = HourlyWeatherDatasource(weatherHourly: weatherHourly)
-//			cellCollectionView.datasource = datasource
+			self.setupViews()
 		}
 	}
 	
@@ -55,5 +53,20 @@ class WeatherSecondHeaderCell: UICollectionViewCell {
 extension WeatherSecondHeaderCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		return CGSize(width: 42, height: frame.height - 20)
+	}
+}
+
+
+// MARK: - UICollectionViewDataSource -
+
+extension WeatherSecondHeaderCell: UICollectionViewDataSource {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return self.datasourceItem.count
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(VerticalWeatherCell.self), for: indexPath) as? VerticalWeatherCell else { return UICollectionViewCell() }
+		cell.datasourceItem = self.datasourceItem[indexPath.row]
+		return cell
 	}
 }

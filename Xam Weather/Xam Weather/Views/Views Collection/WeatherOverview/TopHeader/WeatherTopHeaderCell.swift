@@ -59,22 +59,22 @@ class WeatherTopHeaderCell: UICollectionViewCell {
 		self.addSubview(self.todayLabel)
 		
 		self.cityNameTextView.anchorCenterXToSuperview()
-		self.topConstraint = self.cityNameTextView.topAnchor.constraint(equalTo: topAnchor, constant: frame.height * 0.18)
+		self.topConstraint = self.cityNameTextView.topAnchor.constraint(equalTo: self.topAnchor, constant:  self.frame.height * 0.18)
 		self.topConstraint?.isActive = true
-		self.cityNameTextView.widthAnchor.constraint(equalTo: widthAnchor, constant: 0.8).isActive = true
+		self.cityNameTextView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 0.8).isActive = true
 		self.cityNameTextView.heightAnchor.constraint(equalToConstant: 80).isActive = true
 		
 		self.temperatureLabel.anchorCenterXToSuperview()
 		self.temperatureLabel.topAnchor.constraint(equalTo: self.cityNameTextView.bottomAnchor, constant: -2).isActive = true
 		self.temperatureLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: 0.5).isActive = true
 		
-		let stackView = UIStackView.setupStackview(leftView: temperatureHighLabel, rightView: temperatureLowLabel, portionleft: 0.5, portionright: 0.5, spacing: 0)
-		self.temperatureHighLabel.textAlignment = .left
+		let stackView = UIStackView.setupStackview(leftView: self.temperatureHighLabel, rightView: temperatureLowLabel, portionleft: 0.5, portionright: 0.5, spacing: 0)
+		self.temperatureHighLabel.textAlignment = .right
 		self.temperatureLowLabel.textAlignment = .right
 		addSubview(stackView)
 		
 		_  = stackView.anchor(top: nil, left: nil, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: GlobalConstant.margin, widthConstant: 66, heightConstant: 30)
-		_ = todayLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, topConstant: 0, leftConstant: GlobalConstant.margin, bottomConstant: 0, rightConstant: 0, widthConstant: (GlobalConstant.screenWidth - 2 * GlobalConstant.margin) * 0.6, heightConstant: 30)
+		_ = self.todayLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, topConstant: 0, leftConstant: GlobalConstant.margin, bottomConstant: 0, rightConstant: 0, widthConstant: (GlobalConstant.screenWidth - 2 * GlobalConstant.margin) * 0.6, heightConstant: 30)
 	}
 	
 	override func layoutSubviews() {
@@ -83,7 +83,7 @@ class WeatherTopHeaderCell: UICollectionViewCell {
 	}
 	
 	private func animateAlpha() {
-		self.topConstraint?.constant = frame.height * 0.18
+		self.topConstraint?.constant = self.frame.height * 0.18
 		
 		let alpha = self.calculateAlpha()
 		self.temperatureLabel.alpha = alpha
