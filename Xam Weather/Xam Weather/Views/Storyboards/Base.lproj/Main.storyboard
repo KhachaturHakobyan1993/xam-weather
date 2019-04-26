@@ -22,9 +22,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ary-qC-00Y">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0D5-uA-B9Z">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="764"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vtv-cn-TG7">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asC-SX-wgK" customClass="SearchButtonContainer" customModule="Xam_Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="DM7-hz-Ehh"/>
                                         </constraints>
@@ -34,7 +45,11 @@
                                 <constraints>
                                     <constraint firstItem="asC-SX-wgK" firstAttribute="top" secondItem="Ary-qC-00Y" secondAttribute="top" id="B8h-VW-PwJ"/>
                                     <constraint firstItem="asC-SX-wgK" firstAttribute="leading" secondItem="Ary-qC-00Y" secondAttribute="leading" id="RDF-rQ-Hhr"/>
+                                    <constraint firstAttribute="trailing" secondItem="0D5-uA-B9Z" secondAttribute="trailing" id="eQU-VO-kz6"/>
+                                    <constraint firstAttribute="bottom" secondItem="0D5-uA-B9Z" secondAttribute="bottom" id="hsZ-ZZ-Czf"/>
+                                    <constraint firstItem="0D5-uA-B9Z" firstAttribute="top" secondItem="asC-SX-wgK" secondAttribute="bottom" id="jY0-jk-1dn"/>
                                     <constraint firstAttribute="trailing" secondItem="asC-SX-wgK" secondAttribute="trailing" id="kEX-Kc-nJ9"/>
+                                    <constraint firstItem="0D5-uA-B9Z" firstAttribute="leading" secondItem="Ary-qC-00Y" secondAttribute="leading" id="tK0-Ew-ubJ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -75,6 +90,7 @@
                         <outlet property="mapBarButton" destination="E2J-Yj-3Xk" id="uzt-Mg-vvv"/>
                         <outlet property="recordingBarButton" destination="k1J-Um-10p" id="QJc-0y-M4J"/>
                         <outlet property="searchButtonContainer" destination="asC-SX-wgK" id="TsU-Gs-daY"/>
+                        <outlet property="weatherCollectionView" destination="0D5-uA-B9Z" id="WSs-2a-cfO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

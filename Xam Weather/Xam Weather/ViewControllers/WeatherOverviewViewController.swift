@@ -37,20 +37,21 @@ fileprivate enum CitySelectionOption {
 	}
 }
 
-class WeatherOverviewViewController: UIViewController {
+class WeatherOverviewViewController: WeatherController {
 	@IBOutlet private weak var recordingBarButton: UIBarButtonItem!
 	@IBOutlet private weak var currentLocationBarButton: UIBarButtonItem!
 	@IBOutlet private weak var mapBarButton: UIBarButtonItem!
 	@IBOutlet private weak var searchButtonContainer: SearchButtonContainer!
+	@IBOutlet weak var weatherCollectionView: UICollectionView!
 	private let recordingController = RecordingController()
 	private let locationManager = CLLocationManager()
 	private var clAuthorizationStatus: CLAuthorizationStatus = .notDetermined
 	private var currentCity: City?
-	private var weatherOverview: WeatherOverview!
 	private var citySelcetion: CitySelectionOption = .none {didSet{self.updateCitySelectionOption()}}
 	
 	
 	override func viewDidLoad() {
+		self.collectionView = self.weatherCollectionView
 		super.viewDidLoad()
 		self.setup()
 		self.requestCurrentLocation()
@@ -85,8 +86,8 @@ class WeatherOverviewViewController: UIViewController {
 	}
 	
 	private func showWeatherOverviewForCurrentCity() {
-		guard !self.citySelcetion.isCurrent,
-			self.clAuthorizationStatus != .denied else {
+		guard !self.citySelcetion.isCurrent else { return }
+		guard self.clAuthorizationStatus != .denied else {
 				self.showApplicationSettings()
 				return
 		}
@@ -143,12 +144,17 @@ class WeatherOverviewViewController: UIViewController {
 			self.citySelcetion = .none
 			return
 		}
+		
+		self.activityIndicatorView.startAnimating()
 		WeatherOverview.fetchWeatherOverview(city) { [weak self](weatherOverview) in
+			self?.activityIndicatorView.stopAnimating()
 			guard let weatherOverview = weatherOverview else {
 				UIAlertController.showAlert("Something went wrong 😞", completion: nil)
+				self?.errorMessageLabel.isHidden = false
 				self?.citySelcetion = .none
 				return
 			}
+			self?.errorMessageLabel.isHidden = true
 			self?.updateCitySelectionOptionUI()
 			self?.weatherOverview = weatherOverview
 		}
@@ -169,6 +175,8 @@ class WeatherOverviewViewController: UIViewController {
 		self.showMapViewController()
 	}
 }
+
+
 
 
 // MARK: - CLLocationManagerDelegate -
@@ -230,7 +238,6 @@ extension WeatherOverviewViewController: RecordingControllerDelegate {
 	func didRecognizeSpeech(_ result: String) {
 		guard !result.isEmpty else { return }
 		self.citySelcetion = .speech(cityName: result)
-		print(result)
 	}
 	
 	func didFail(_ title: String, _ message: String) {
@@ -241,3 +248,5 @@ extension WeatherOverviewViewController: RecordingControllerDelegate {
 		self.showApplicationSettings()
 	}
 }
+
+

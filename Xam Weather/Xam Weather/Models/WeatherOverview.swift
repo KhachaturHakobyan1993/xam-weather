@@ -6,7 +6,7 @@
 //  Copyright © 2019 Khachatur Hakobyan. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct WeatherOverview: Codable {
 	let coord: Coord
@@ -21,12 +21,13 @@ struct WeatherOverview: Codable {
 	let id: Int
 	let name: String
 	let cod: Int
+	
 }
 
 extension WeatherOverview {
 	static func fetchWeatherOverview(_ city: String,
 									 _ completion: @escaping (_ weatherOverview: WeatherOverview?) -> Void) {
-		let urlString = "https://samples.openweathermap.org/data/2.5/weather?q=\(city),uk&appid=b6907d289e10d714a6e88b30761fae22"
+		let urlString = "https://samples.openweathermap.org/data/2.5/weather?q=\(city)&appid=b6907d289e10d714a6e88b30761fae22"
 		guard let url = URL(string: urlString) else { completion(nil); return }
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
 			guard let data = data, error == nil else { completion(nil); return }
