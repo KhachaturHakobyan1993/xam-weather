@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreLocation
+import Lottie
 
 fileprivate enum CitySelectionOption {
+	case menu(city: City)
 	case speech(cityName: String)
 	case current(city: City)
 	case map(city: City)
@@ -18,6 +20,7 @@ fileprivate enum CitySelectionOption {
 	
 	var cityName: String {
 		switch self {
+		case let .menu(city): return city.name
 		case let .speech(cityName): return cityName
 		case let .current(city): return city.name
 		case let .map(city): return city.name
@@ -28,6 +31,7 @@ fileprivate enum CitySelectionOption {
 	
 	var isCurrent: Bool {
 		switch self {
+		case .menu(_): return false
 		case .speech(_): return false
 		case .current(_): return true
 		case .map(_): return false
@@ -38,11 +42,14 @@ fileprivate enum CitySelectionOption {
 }
 
 final class WeatherOverviewViewController: WeatherController {
+	@IBOutlet private weak var menuBarButton: UIBarButtonItem!
 	@IBOutlet private weak var recordingBarButton: UIBarButtonItem!
 	@IBOutlet private weak var currentLocationBarButton: UIBarButtonItem!
 	@IBOutlet private weak var mapBarButton: UIBarButtonItem!
 	@IBOutlet private weak var searchButtonContainer: SearchButtonContainer!
 	@IBOutlet weak var weatherCollectionView: UICollectionView!
+	@IBOutlet private weak var recordingAnimationView: UIView!
+	private var animationView = LOTAnimationView(name: "AnnounceCityAnimation")
 	private let recordingController = RecordingController()
 	private let locationManager = CLLocationManager()
 	private var clAuthorizationStatus: CLAuthorizationStatus = .notDetermined
@@ -68,6 +75,8 @@ final class WeatherOverviewViewController: WeatherController {
 	private func setup() {
 		self.searchButtonContainer.delegate = self
 		_ = WeatherCity.allCities
+		self.recordingAnimationView.addSubview(self.animationView)
+		self.animationView.fillSuperview()
 	}
 	
 	private func requestCurrentLocation() {
@@ -86,7 +95,14 @@ final class WeatherOverviewViewController: WeatherController {
 		UIApplication.shared.open(url, options: [:], completionHandler: nil)
 	}
 	
+	private func showWeatherAllCitiesViewController() {
+		guard let weatherAllCitiesViewController = WeatherAllCitiesViewController.instantiateFromStoryboard() else { return }
+		weatherAllCitiesViewController.delegate = self
+		self.present(weatherAllCitiesViewController, animated: true, completion: nil)
+	}
+	
 	private func showWeatherOverviewForRecognizedSpeech() {
+		self.animateRecordingView(true)
 		self.recordingController.delegate = self
 		self.recordingController.requestAuthorizationAndRecording()
 	}
@@ -107,7 +123,7 @@ final class WeatherOverviewViewController: WeatherController {
 	private func showApplePlacesViewController() {
 		guard let applePlacesViewController = ApplePlacesViewController.instantiateFromStoryboard() else { return }
 		applePlacesViewController.delegate = self
-		self.navigationController?.present(applePlacesViewController, animated: true, completion: nil)
+		self.present(applePlacesViewController, animated: true, completion: nil)
 	}
 	
 	private func showMapViewController() {
@@ -118,6 +134,7 @@ final class WeatherOverviewViewController: WeatherController {
 	
 	private func updateCitySelectionOption() {
 		switch self.citySelcetion {
+		case let .menu(city): self.fetchWeatherOverview(city.name)
 		case let .speech(cityName): self.fetchWeatherOverview(cityName)
 		case let .current(city): self.fetchWeatherOverview(city.name)
 		case let .map(city): self.fetchWeatherOverview(city.name)
@@ -127,18 +144,25 @@ final class WeatherOverviewViewController: WeatherController {
 	}
 	
 	private func updateCitySelectionOptionUI() {
+		self.menuBarButton.image = #imageLiteral(resourceName: "imageMenuOff")
 		self.recordingBarButton.image = #imageLiteral(resourceName: "imageRecordingOff")
 		self.currentLocationBarButton.image = #imageLiteral(resourceName: "imageMyLocationOff")
 		self.mapBarButton.image = #imageLiteral(resourceName: "imageMapOff")
 		self.searchButtonContainer.setSearchImage(#imageLiteral(resourceName: "imageSearchOff"))
 		self.searchButtonContainer.updateSearchTitle(self.citySelcetion.cityName)
 		switch self.citySelcetion {
+		case .menu(_): self.menuBarButton.image = #imageLiteral(resourceName: "imageMenuOn")
 		case .speech(_): self.recordingBarButton.image = #imageLiteral(resourceName: "imageRecordingOn")
 		case .current(_): self.currentLocationBarButton.image = #imageLiteral(resourceName: "imageMyLocationOn")
 		case .map(_): self.mapBarButton.image = #imageLiteral(resourceName: "imageMapOn")
 		case .autocomplete(_): self.searchButtonContainer.setSearchImage(#imageLiteral(resourceName: "imageSearchOn"))
 		case .none: break
 		}
+	}
+	
+	private func animateRecordingView(_ animate: Bool) {
+		self.recordingAnimationView.isHidden = !animate
+		animate ? self.animationView.play() : self.animationView.stop()
 	}
 	
 	
@@ -168,6 +192,10 @@ final class WeatherOverviewViewController: WeatherController {
 	
 	
 	// MARK: - Methods IBActions -
+	
+	@IBAction func menuButtonTapped(_ sender: UIBarButtonItem) {
+		self.showWeatherAllCitiesViewController()
+	}
 	
 	@IBAction private func recordingBarButtonTapped(_ sender: UIBarButtonItem) {
 		self.showWeatherOverviewForRecognizedSpeech()
@@ -218,10 +246,19 @@ extension WeatherOverviewViewController: SearchButtonContainerDelegate {
 }
 
 
+// MARK: - WeatherAllCitiesViewControllerDelegate -
+
+extension WeatherOverviewViewController: WeatherAllCitiesViewControllerDelegate {
+	func didSelectCityWeatherAllCities(_ city: City) {
+		self.citySelcetion = .menu(city: city)
+	}
+}
+
+
 // MARK: - ApplePlacesViewControllerDelegate -
 
 extension WeatherOverviewViewController: ApplePlacesViewControllerDelegate {
-	func didSelectCity(city: City) {
+	func didSelectCityFromApplePlaces(_ city: City) {
 		self.citySelcetion = .autocomplete(city: city)
 	}
 }
@@ -230,7 +267,7 @@ extension WeatherOverviewViewController: ApplePlacesViewControllerDelegate {
 // MARK: - MapViewControllerDelegate -
 
 extension WeatherOverviewViewController: MapViewControllerDelegate {
-	func didSelectCity(_ city: City) {
+	func didSelectCityFromMap(_ city: City) {
 		self.citySelcetion = .map(city: city)
 	}
 }
@@ -240,6 +277,7 @@ extension WeatherOverviewViewController: MapViewControllerDelegate {
 
 extension WeatherOverviewViewController: RecordingControllerDelegate {
 	func didRecognizeSpeech(_ result: String) {
+		self.animateRecordingView(false)
 		guard !result.isEmpty else { return }
 		self.citySelcetion = .speech(cityName: result)
 	}
@@ -252,5 +290,3 @@ extension WeatherOverviewViewController: RecordingControllerDelegate {
 		self.showApplicationSettings()
 	}
 }
-
-

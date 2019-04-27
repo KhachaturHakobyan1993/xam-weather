@@ -15,10 +15,13 @@ class WeatherController: UIViewController {
 	var collectionView: UICollectionView! = nil
 
 	private let backgroundImageView: UIImageView = {
-		let iv = UIImageView()
-		iv.image = #imageLiteral(resourceName: "imageBlueSkyBackground")
-		iv.clipsToBounds = true
-		return iv
+		let imageView = UIImageView()
+		imageView.animationImages = [#imageLiteral(resourceName: "imageBlueSkyBackground"), #imageLiteral(resourceName: "imageNight")]
+		imageView.animationDuration = 15
+		imageView.startAnimating()
+		imageView.image = #imageLiteral(resourceName: "imageBlueSkyBackground")
+		imageView.clipsToBounds = true
+		return imageView
 	}()
 	
 	let errorMessageLabel: UILabel = {
@@ -52,7 +55,7 @@ class WeatherController: UIViewController {
 	private func setupActivityIndicator() {
 		self.view.addSubview(self.activityIndicatorView)
 		self.activityIndicatorView.anchorCenterXToSuperview()
-		self.activityIndicatorView.anchorCenterYToSuperview()
+		self.activityIndicatorView.anchorCenterYToSuperview(constant: 22)
 	}
 	
 	private func setupErrorMessageLabel() {

@@ -1,0 +1,17 @@
+# platform :ios, '9.0'
+
+target 'Xam Weather' do
+  use_frameworks!
+  pod 'lottie-ios'
+  
+  target 'Xam WeatherTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Xam WeatherUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

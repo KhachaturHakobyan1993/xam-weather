@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 protocol MapViewControllerDelegate: NSObjectProtocol {
-	func didSelectCity(_ city: City)
+	func didSelectCityFromMap(_ city: City)
 }
 
 final class MapViewController: UIViewController {
@@ -111,7 +111,7 @@ final class MapViewController: UIViewController {
 	
 	@IBAction private func doneButtonTapped(_ sender: UIButton) {
 		self.navigationController?.popViewController(animated: true)
-		self.delegate?.didSelectCity(self.selectedCity)
+		self.delegate?.didSelectCityFromMap(self.selectedCity)
 	}
 }
 

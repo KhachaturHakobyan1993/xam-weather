@@ -1,0 +1,6 @@
+framework module Pods_Xam_WeatherTests {
+  umbrella header "Pods-Xam WeatherTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

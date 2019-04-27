@@ -19,4 +19,13 @@ extension CLLocation {
 			completion(city)
 		}
 	}
+	
+	func getTimeZone(_ completion: @escaping (TimeZone?) -> Void ) {
+		let ceo = CLGeocoder()
+		ceo.reverseGeocodeLocation(self) { (placemarks, error) in
+			guard let placemark = placemarks?.first,
+				let timeZone = placemark.timeZone else { completion(nil); return }
+			completion(timeZone)
+		}
+	}
 }
