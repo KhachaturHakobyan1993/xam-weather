@@ -21,6 +21,6 @@ class SeparationLineView: UIView {
 	}
 	
 	private func setup() {
-		backgroundColor = UIColor.white.withAlphaComponent(0.5)
+		backgroundColor = UIColor.App.transparentWhite.value
 	}
 }

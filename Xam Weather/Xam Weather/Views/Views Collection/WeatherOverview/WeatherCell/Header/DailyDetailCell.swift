@@ -10,40 +10,41 @@ import UIKit
 
 class DailyDetailCell: UICollectionViewCell {
 	
-	let dayLabel: WhiteLabel = {
+	private let dayLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	let temperatureHighLabel: WhiteLabel = {
+	private let temperatureHighLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	let temperatureLowLabel: SemiTransparentLabel = {
+	private let temperatureLowLabel: SemiTransparentLabel = {
 		let label = SemiTransparentLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	let weatherIcon: AutoFittingImageView = {
+	private let weatherIcon: AutoFittingImageView = {
 		let imageView = AutoFittingImageView()
 		return imageView
 	}()
 	
-	 var datasourceItem: Any? {
+	var datasourceItem: ListViewModel! {
 		didSet {
-//			guard let weatherDaily = datasourceItem as? WeatherDaily else {
-//				return
-//			}
-//			let weatherDailyViewModel = WeatherDailyViewModel(weatherDaily: weatherDaily)
-//			dayLabel.text = weatherDailyViewModel.weekDay
-//			weatherIcon.image = weatherDailyViewModel.weatherImage
-//			temperatureLowLabel.text = weatherDailyViewModel.low
-//			temperatureHighLabel.text = weatherDailyViewModel.high
+			guard let _ = self.datasourceItem  else { return }
+			self.setupViews()
+			self.dayLabel.text = self.datasourceItem.weekDay
+			self.weatherIcon.image = self.datasourceItem.weatherIcon
+			self.temperatureLowLabel.text = self.datasourceItem.lowTemperature
+			self.temperatureHighLabel.text = self.datasourceItem.highTemperature
 		}
 	}
 	
-	 func setupViews() {
+	
+	// MARK: - Methods Setup -
+	
+	func setupViews() {
 		self.addSubview(self.weatherIcon)
 		self.addSubview(self.dayLabel)
 		

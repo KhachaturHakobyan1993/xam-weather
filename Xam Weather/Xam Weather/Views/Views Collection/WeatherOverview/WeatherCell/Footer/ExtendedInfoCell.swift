@@ -10,7 +10,7 @@ import UIKit
 
 class ExtendedInfoCell: UICollectionViewCell {
 	
-	lazy var cellCollectionView: UICollectionView = {
+	private lazy var cellCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .vertical
 		layout.minimumInteritemSpacing = 0
@@ -20,19 +20,23 @@ class ExtendedInfoCell: UICollectionViewCell {
 		cv.backgroundColor = .clear
 		cv.showsVerticalScrollIndicator = false
 		cv.isScrollEnabled = false
+		cv.dataSource = self
 		cv.delegate = self
+		cv.register(ExtendedDetailCell.self, forCellWithReuseIdentifier: NSStringFromClass(ExtendedDetailCell.self))
 		return cv
 	}()
 	
-	var datasourceItem: Any? {
+	var datasourceItem: [(ExtendedInfo, String)]! {
 		didSet{
-//			guard let weatherExtendedInfo = datasourceItem as? WeatherExtendedInfo else { return }
-//			let extendedInfoDatasource = ExtendedInfoDatasource(weatherExtendedInfo: weatherExtendedInfo)
-//			cellCollectionView.datasource = extendedInfoDatasource
+			guard let _ = datasourceItem  else { return }
+			self.setupViews()
 		}
 	}
 	
-	 func setupViews() {
+	
+	// MARK: - Methods Setup -
+	
+	func setupViews() {
 		self.addSubview(self.cellCollectionView)
 		self.cellCollectionView.fillSuperview()
 	}
@@ -43,11 +47,12 @@ class ExtendedInfoCell: UICollectionViewCell {
 
 extension ExtendedInfoCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 0
+		return self.datasourceItem.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ExtendedDetailCell.self), for: indexPath) as? ExtendedDetailCell else { return UICollectionViewCell() }
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(ExtendedDetailCell.self), for: indexPath) as? ExtendedDetailCell else { return UICollectionViewCell() }
+		cell.datasourceItem = self.datasourceItem[indexPath.row]
 		return cell
 	}
 }

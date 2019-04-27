@@ -10,7 +10,7 @@ import UIKit
 
 class WeatherSecondHeaderCell: UICollectionViewCell {
 	
-	lazy var cellCollectionView: UICollectionView = {
+	private lazy var cellCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 0)
@@ -23,16 +23,20 @@ class WeatherSecondHeaderCell: UICollectionViewCell {
 		return cv
 	}()
 	
-	let topSeparator = SeparationLineView()
-	let bottomSeparator = SeparationLineView()
+	private let topSeparator = SeparationLineView()
+	private let bottomSeparator = SeparationLineView()
 	
-	 var datasourceItem: [List]! {
+	var datasourceItem: [ListViewModel]! {
 		didSet{
+			guard let _ = self.datasourceItem else { return }
 			self.setupViews()
 		}
 	}
 	
-	 func setupViews() {
+	
+	// MARK: - Methods Setup -
+	
+	func setupViews() {
 		self.addSubview(self.cellCollectionView)
 		self.addSubview(self.topSeparator)
 		self.addSubview(self.bottomSeparator)

@@ -10,50 +10,58 @@ import UIKit
 
 class WeatherTopHeaderCell: UICollectionViewCell {
 	
-	let cityNameTextView: PassiveTextView = {
-		let tv = PassiveTextView()
-		tv.font = UIFont.systemFont(ofSize: 18)
-		return tv
+	private let cityNameTextView: PassiveTextView = {
+		let textView = PassiveTextView()
+		textView.font = UIFont.systemFont(ofSize: 18)
+		return textView
 	}()
 	
-	let temperatureLabel: WhiteLabel = {
+	private let temperatureLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 88, weight: UIFont.Weight.thin))
 		label.textAlignment = .center
 		return label
 	}()
 	
-	let todayLabel: WhiteLabel = {
+	private let todayLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	let temperatureHighLabel: WhiteLabel = {
+	private let temperatureHighLabel: WhiteLabel = {
 		let label = WhiteLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	let temperatureLowLabel: SemiTransparentLabel = {
+	private let temperatureLowLabel: SemiTransparentLabel = {
 		let label = SemiTransparentLabel(font: UIFont.systemFont(ofSize: 19))
 		return label
 	}()
 	
-	var topConstraint: NSLayoutConstraint?
-	var maxHeaderHeight: CGFloat?
+	private var topConstraint: NSLayoutConstraint?
+	private var maxHeaderHeight: CGFloat?
 	
-	var datasourceItem: WeatherOverview? {
+	var datasourceItem: WeatherOverviewViewModel! {
 		didSet {
-			guard let weatherOverview = datasourceItem else { return }
+			guard let weatherOverview = self.datasourceItem else { return }
 			self.setupViews()
-			let weatherOverviewViewModel = WeatherOverviewViewModel(weatherOverView: weatherOverview)
-			self.cityNameTextView.attributedText = weatherOverviewViewModel.cityAndDescriptionAttributedString
-			self.temperatureLabel.text = weatherOverviewViewModel.temperature
-			self.todayLabel.text = weatherOverviewViewModel.weekDay
-			self.temperatureLowLabel.text = weatherOverviewViewModel.lowTemperature
-			self.temperatureHighLabel.text = weatherOverviewViewModel.highTemperature
+			self.cityNameTextView.attributedText = weatherOverview.cityAndDescriptionAttributedString
+			self.temperatureLabel.text = weatherOverview.temperature
+			self.todayLabel.text = weatherOverview.weekDay
+			self.temperatureLowLabel.text = weatherOverview.lowTemperature
+			self.temperatureHighLabel.text = weatherOverview.highTemperature
 		}
 	}
 	
-	 func setupViews() {
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		self.animateAlpha()
+	}
+	
+	
+	// MARK: - Methods Setup -
+	
+	func setupViews() {
 		self.addSubview(self.cityNameTextView)
 		self.addSubview(self.temperatureLabel)
 		self.addSubview(self.todayLabel)
@@ -69,7 +77,7 @@ class WeatherTopHeaderCell: UICollectionViewCell {
 		self.temperatureLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: 0.5).isActive = true
 		
 		let stackView = UIStackView.setupStackview(leftView: self.temperatureHighLabel, rightView: temperatureLowLabel, portionleft: 0.5, portionright: 0.5, spacing: 0)
-		self.temperatureHighLabel.textAlignment = .right
+		self.temperatureHighLabel.textAlignment = .left
 		self.temperatureLowLabel.textAlignment = .right
 		addSubview(stackView)
 		
@@ -77,10 +85,8 @@ class WeatherTopHeaderCell: UICollectionViewCell {
 		_ = self.todayLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: nil, topConstant: 0, leftConstant: GlobalConstant.margin, bottomConstant: 0, rightConstant: 0, widthConstant: (GlobalConstant.screenWidth - 2 * GlobalConstant.margin) * 0.6, heightConstant: 30)
 	}
 	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-		self.animateAlpha()
-	}
+	
+	// MARK: - Methods -
 	
 	private func animateAlpha() {
 		self.topConstraint?.constant = self.frame.height * 0.18

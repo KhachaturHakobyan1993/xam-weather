@@ -13,7 +13,7 @@ protocol MapViewControllerDelegate: NSObjectProtocol {
 	func didSelectCity(_ city: City)
 }
 
-class MapViewController: UIViewController {
+final class MapViewController: UIViewController {
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var markerAddressLabel: UILabel!
 	@IBOutlet weak var doneButton: UIButton!
@@ -127,7 +127,7 @@ extension MapViewController: MKMapViewDelegate {
 	func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 		if annotation is MKUserLocation { return nil }
 		let pinAnnotationView = MKPinAnnotationView()
-		pinAnnotationView.pinTintColor = UIColor(named: "lightBlue")!
+		pinAnnotationView.pinTintColor = UIColor.App.lightBlue.value
 		return pinAnnotationView
 	}
 }

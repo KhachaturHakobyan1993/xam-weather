@@ -22,6 +22,6 @@ class SemiTransparentLabel: UILabel {
 	}
 	
 	private func setupColor() {
-		self.textColor = UIColor.white.withAlphaComponent(0.5)
+		self.textColor = UIColor.App.transparentWhite.value
 	}
 }

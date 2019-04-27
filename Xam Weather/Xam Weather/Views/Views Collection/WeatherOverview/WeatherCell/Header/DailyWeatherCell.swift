@@ -10,7 +10,7 @@ import UIKit
 
 class DailyWeatherCell: UICollectionViewCell {
 	
-	lazy var cellCollectionView: UICollectionView = {
+	private lazy var cellCollectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .vertical
 		layout.minimumLineSpacing = 0
@@ -18,39 +18,37 @@ class DailyWeatherCell: UICollectionViewCell {
 		let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		cv.backgroundColor = .clear
 		cv.showsVerticalScrollIndicator = false
+		cv.dataSource = self
 		cv.delegate = self
 		cv.isScrollEnabled = false
+		cv.register(DailyDetailCell.self, forCellWithReuseIdentifier: NSStringFromClass(DailyDetailCell.self))
 		return cv
 	}()
 	
-	let separatorLineView: UIView = {
+	private let separatorLineView: UIView = {
 		let lineView = UIView()
 		lineView.backgroundColor = UIColor(white: 0, alpha: 0.5)
 		lineView.isHidden = true
 		return lineView
 	}()
 	
-	 var datasourceItem: Any? {
+	 var datasourceItem: [ListViewModel]! {
 		didSet{
-//			guard let dailyWeather = datasourceItem as? [WeatherDaily] else {
-//				return
-//			}
-//			setDatasource(dailyWeather: dailyWeather)
+			guard let _ = self.datasourceItem else { return }
+			self.setupViews()
 		}
 	}
 	
+	
+	// MARK: - Methods Setup -
+
 	 func setupViews() {
 		self.addSubview(self.cellCollectionView)
 		self.addSubview(self.separatorLineView)
 		self.cellCollectionView.fillSuperview()
-		self.separatorLineView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+		_ = self.separatorLineView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0.5)
+		self.separatorLineView.backgroundColor = UIColor.App.transparentWhite.value
 		self.separatorLineView.isHidden = false
-	}
-	
-
-	fileprivate func setDatasource(dailyWeather: [WeatherOverview]) {
-//		let dailyWeatherDatasource = DailyWeatherDatasource(dailyWeather: dailyWeather)
-//		cellCollectionView.datasource = dailyWeatherDatasource
 	}
 }
 
@@ -59,11 +57,12 @@ class DailyWeatherCell: UICollectionViewCell {
 
 extension DailyWeatherCell: UICollectionViewDataSource {
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 0
+		return self.datasourceItem.count
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: DailyDetailCell.self), for: indexPath) as? DailyDetailCell else { return UICollectionViewCell() }
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:  NSStringFromClass(DailyDetailCell.self), for: indexPath) as? DailyDetailCell else { return UICollectionViewCell() }
+		cell.datasourceItem = self.datasourceItem[indexPath.row]
 		return cell
 	}
 }
@@ -73,8 +72,6 @@ extension DailyWeatherCell: UICollectionViewDataSource {
 
 extension DailyWeatherCell: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		return CGSize(width: frame.width - 2 * GlobalConstant.margin, height: 30)
+		return CGSize(width: self.frame.width - 2 * GlobalConstant.margin, height: 30)
 	}
 }
-
-
