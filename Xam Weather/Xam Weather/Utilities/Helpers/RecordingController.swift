@@ -57,13 +57,6 @@ class RecordingController: NSObject {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 			self.timerEnded()
 		}
-//		let timer = Timer(timeInterval: 5.0, target: self, selector: #selector(RecordingController.timerEnded), userInfo: nil, repeats: false)
-//		RunLoop.current.add(timer, forMode: .common)
-		
-		let audioSession = AVAudioSession.sharedInstance()
-		try audioSession.setCategory(.record, mode: .measurement, policy: .default, options: .defaultToSpeaker)
-		try audioSession.setMode(AVAudioSession.Mode.measurement)
-		try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 		
 		self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
 		let inputNode = self.audioEngine.inputNode
