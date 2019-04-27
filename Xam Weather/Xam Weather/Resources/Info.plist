@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ApiKey</key>
+	<string>9e7f2aaea74d96e5be0233be8babd9da</string>
+	<key>BaseURL</key>
+	<string>https://samples.openweathermap.org/data/2.5/forecast?</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>“Your speech will be detected after tapping the recording button.”</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

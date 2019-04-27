@@ -33,13 +33,18 @@ final class MapViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.initialSetup()
 		self.setUpMapView()
 		self.setUpTapGesture()
 	}
 	
 	
 	// MARK: - Methods Setup -
-
+	
+	private func initialSetup() {
+		self.view.accessibilityIdentifier = NSStringFromClass(MapViewController.self)
+	}
+	
 	private func setUpMapView() {
 		self.navigationItem.rightBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
 		self.mapView.delegate = self

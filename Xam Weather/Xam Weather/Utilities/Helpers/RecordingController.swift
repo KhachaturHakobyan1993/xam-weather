@@ -74,7 +74,6 @@ class RecordingController: NSObject {
 			var isFinal = false
 			
 			if let result = result {
-				print("result: \(result.isFinal)")
 				isFinal = result.isFinal
 				self.speechResult = result
 			}

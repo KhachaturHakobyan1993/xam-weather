@@ -14,9 +14,9 @@ protocol ApplePlacesViewControllerDelegate: NSObjectProtocol {
 }
 
 final class ApplePlacesViewController: UIViewController {
-	@IBOutlet weak var searchResultsTableView: UITableView!
+	@IBOutlet private weak var searchResultsTableView: UITableView!
 	private var searchResults = [MKLocalSearchCompletion]()
-	lazy var searchCompleter: MKLocalSearchCompleter = {
+	private lazy var searchCompleter: MKLocalSearchCompleter = {
 		let sCompleter = MKLocalSearchCompleter()
 		sCompleter.delegate = self
 		sCompleter.region = MKCoordinateRegion()
@@ -34,12 +34,17 @@ final class ApplePlacesViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.initialSetup()
 		self.setup()
 	}
 	
 	
 	// MARK: - Methods Setup -
-
+	
+	private func initialSetup() {
+		self.view.accessibilityIdentifier = NSStringFromClass(ApplePlacesViewController.self)
+	}
+	
 	private func setup() {
 		self.searchResultsTableView.tableFooterView = UIView()
 		let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -108,4 +113,3 @@ extension ApplePlacesViewController: MKLocalSearchCompleterDelegate {
 		debugPrint(error.localizedDescription)
 	}
 }
-

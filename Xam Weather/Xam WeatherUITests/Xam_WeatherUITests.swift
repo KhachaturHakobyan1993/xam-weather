@@ -9,26 +9,51 @@
 import XCTest
 
 class Xam_WeatherUITests: XCTestCase {
+	private var app: XCUIApplication!
+	
+	
+	override func setUp() {
+		super.setUp()
+		self.continueAfterFailure = false
+		self.app = XCUIApplication()
+	}
+	
+	
+	// MARK: - Tests -
+	
+	func testGoingMapViewController() {
+		self.app.launch()
+		XCTAssertTrue(self.app.isDisplayingWeatherOverviewViewController)
+		self.app.navigationBars["Xam_Weather.WeatherOverviewView"]
+			.children(matching: .button).element(boundBy: 1)
+			.tap()
+		XCTAssertTrue(self.app.isDisplayingMapViewController)
+	}
+	
+	func testGoingApplePlacesViewController() {
+		self.app.launch()
+		XCTAssertTrue(self.app.isDisplayingWeatherOverviewViewController)
+		XCUIApplication().otherElements["Xam_Weather.WeatherOverviewViewController"]
+			.children(matching: .other).element.children(matching: .other).element
+			.children(matching: .other).element.children(matching: .button).element
+			.tap()
+		XCTAssertTrue(self.app.isDisplayingApplePlacesViewController)
+	}
+}
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
 
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+// MARK: - Displaying Names Of UIViewControllers -
 
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
+extension XCUIApplication {
+	var isDisplayingWeatherOverviewViewController: Bool {
+		return self.otherElements["Xam_Weather.WeatherOverviewViewController"].exists
+	}
+	
+	var isDisplayingMapViewController: Bool {
+		return self.otherElements["Xam_Weather.MapViewController"].exists
+	}
+	
+	var isDisplayingApplePlacesViewController: Bool {
+		return self.otherElements["Xam_Weather.ApplePlacesViewController"].exists
+	}
 }

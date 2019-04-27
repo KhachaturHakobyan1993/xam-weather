@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		Network.reachabilitySetup()
+		if CommandLine.arguments.contains("--uitesting") {
+			print("sssss")
+		}
 		return true
 	}
 

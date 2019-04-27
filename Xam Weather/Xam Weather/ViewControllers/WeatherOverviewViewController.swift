@@ -51,7 +51,7 @@ final class WeatherOverviewViewController: WeatherController {
 	
 	
 	override func viewDidLoad() {
-		self.collectionView = self.weatherCollectionView
+		self.initialSetup()
 		super.viewDidLoad()
 		self.setup()
 		self.requestCurrentLocation()
@@ -60,6 +60,11 @@ final class WeatherOverviewViewController: WeatherController {
 	
 	// MARK: - Methods Setup -
 
+	private func initialSetup() {
+		self.collectionView = self.weatherCollectionView
+		self.view.accessibilityIdentifier = NSStringFromClass(WeatherOverviewViewController.self)
+	}
+	
 	private func setup() {
 		self.searchButtonContainer.delegate = self
 		_ = WeatherCity.allCities
@@ -164,15 +169,15 @@ final class WeatherOverviewViewController: WeatherController {
 	
 	// MARK: - Methods IBActions -
 	
-	@IBAction func recordingBarButtonTapped(_ sender: UIBarButtonItem) {
+	@IBAction private func recordingBarButtonTapped(_ sender: UIBarButtonItem) {
 		self.showWeatherOverviewForRecognizedSpeech()
 	}
 	
-	@IBAction func currentBarButtonTapped(_ sender: UIBarButtonItem) {
+	@IBAction private func currentBarButtonTapped(_ sender: UIBarButtonItem) {
 		self.showWeatherOverviewForCurrentCity()
 	}
 	
-	@IBAction func mapBarButtonTapped(_ sender: UIBarButtonItem) {
+	@IBAction private func mapBarButtonTapped(_ sender: UIBarButtonItem) {
 		self.showMapViewController()
 	}
 }

@@ -73,7 +73,6 @@ class WeatherCell: UICollectionViewCell {
 	@objc private func handleSetOffset(notification: Notification) {
 		guard let offset = notification.object as? CGFloat else { return }
 		self.cellCollectionView.contentOffset = CGPoint(x: 0, y: offset)
-		print(offset)
 	}
 }
 

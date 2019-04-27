@@ -19,12 +19,20 @@ struct WeatherOverview: Codable {
 extension WeatherOverview {
 	static func fetchWeatherOverview(_ city: String,
 									 _ completion: @escaping (_ weatherOverview: WeatherOverview?) -> Void) {
-		guard let isWeatherCity = WeatherCity.allCities.first(where: {$0.name.lowercased().contains(city.lowercased())}) else { completion(nil); return  }
-		let apiKey = "9e7f2aaea74d96e5be0233be8babd9da"
-		let urlString = "https://samples.openweathermap.org/data/2.5/forecast?id=\(isWeatherCity.id)&appid=\(apiKey)"
-		guard let url = URL(string: urlString) else { completion(nil); return }
+		guard let isWeatherCity = WeatherCity.allCities.first(where: {$0.name.lowercased().contains(city.lowercased())}),
+			let infoPlist = Bundle.main.infoDictionary,
+			let urlString = infoPlist["BaseURL"] as? String,
+			let baseURL = URL(string: urlString),
+			let apiKey = infoPlist["ApiKey"] as? String else { completion(nil); return }
 		
-		URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
+		let id = isWeatherCity.id.description
+		let query: [String: String] = [
+			"appid": apiKey,
+			"id": id
+		]
+		guard let forecastURL = baseURL.withQueries(query) else { completion(nil); return }
+		
+		URLSession.shared.dataTask(with: forecastURL, completionHandler: { (data, _, error) in
 			guard let data = data, error == nil else { completion(nil); return }
 			let jsonDecoder = JSONDecoder()
 			guard let weatherOverview = try? jsonDecoder.decode(WeatherOverview.self, from: data) else { completion(nil); return }

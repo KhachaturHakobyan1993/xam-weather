@@ -9,11 +9,11 @@
 import UIKit
 
 class WeatherController: UIViewController {
-	var collectionView: UICollectionView! = nil
 	private let headerCells: [UICollectionViewCell.Type] = [WeatherTopHeaderCell.self, WeatherSecondHeaderCell.self]
 	private let cells: [UICollectionViewCell.Type] = [WeatherCell.self]
 	var weatherOverview: WeatherOverviewViewModel! {didSet{self.collectionView.reloadData()}}
-	
+	var collectionView: UICollectionView! = nil
+
 	private let backgroundImageView: UIImageView = {
 		let iv = UIImageView()
 		iv.image = #imageLiteral(resourceName: "imageBlueSkyBackground")
