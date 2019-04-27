@@ -12,7 +12,7 @@ class WeatherController: UIViewController {
 	var collectionView: UICollectionView! = nil
 	private let headerCells: [UICollectionViewCell.Type] = [WeatherTopHeaderCell.self, WeatherSecondHeaderCell.self]
 	private let cells: [UICollectionViewCell.Type] = [WeatherCell.self]
-	var weatherOverview: WeatherOverview! {didSet{self.collectionView.reloadData()}}
+	var weatherOverview: WeatherOverviewViewModel! {didSet{self.collectionView.reloadData()}}
 	
 	private let backgroundImageView: UIImageView = {
 		let iv = UIImageView()
@@ -109,7 +109,7 @@ extension WeatherController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(WeatherCell.self), for: indexPath) as? WeatherCell else { return UICollectionViewCell() }
-		cell.backgroundColor = UIColor(named: "lightBlue")!
+		cell.datasourceItem = self.weatherOverview
 		return cell
 	}
 	
@@ -124,7 +124,7 @@ extension WeatherController: UICollectionViewDataSource {
 			reusableView = topHeaderCell
 		case WeatherHeaders.centerHeader.section:
 			guard let secondHeaderCell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NSStringFromClass(WeatherSecondHeaderCell.self), for: indexPath) as? WeatherSecondHeaderCell else { return reusableView }
-			secondHeaderCell.datasourceItem = self.weatherOverview.list
+			secondHeaderCell.datasourceItem = self.weatherOverview.listViewModels
 			reusableView = secondHeaderCell
 		default: break
 		}

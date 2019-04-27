@@ -13,7 +13,7 @@ protocol ApplePlacesViewControllerDelegate: NSObjectProtocol {
 	func didSelectCity(city: City)
 }
 
-class ApplePlacesViewController: UIViewController {
+final class ApplePlacesViewController: UIViewController {
 	@IBOutlet weak var searchResultsTableView: UITableView!
 	private var searchResults = [MKLocalSearchCompletion]()
 	lazy var searchCompleter: MKLocalSearchCompleter = {

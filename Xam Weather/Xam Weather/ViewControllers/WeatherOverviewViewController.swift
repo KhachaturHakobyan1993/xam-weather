@@ -37,7 +37,7 @@ fileprivate enum CitySelectionOption {
 	}
 }
 
-class WeatherOverviewViewController: WeatherController {
+final class WeatherOverviewViewController: WeatherController {
 	@IBOutlet private weak var recordingBarButton: UIBarButtonItem!
 	@IBOutlet private weak var currentLocationBarButton: UIBarButtonItem!
 	@IBOutlet private weak var mapBarButton: UIBarButtonItem!
@@ -157,7 +157,7 @@ class WeatherOverviewViewController: WeatherController {
 			}
 			self?.errorMessageLabel.isHidden = true
 			self?.updateCitySelectionOptionUI()
-			self?.weatherOverview = weatherOverview
+			self?.weatherOverview = WeatherOverviewViewModel(weatherOverView: weatherOverview)
 		}
 	}
 	

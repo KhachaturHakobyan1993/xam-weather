@@ -98,7 +98,7 @@ enum WeatherHeaders: Int {
 		case .topHeader:
 			return 100
 		case .centerHeader:
-			return defaultHeight
+			return self.defaultHeight
 		}
 	}
 }

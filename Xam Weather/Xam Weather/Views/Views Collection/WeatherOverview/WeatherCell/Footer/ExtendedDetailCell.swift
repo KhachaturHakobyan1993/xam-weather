@@ -22,28 +22,34 @@ class ExtendedDetailCell: UICollectionViewCell {
 		return lineView
 	}()
 	
-	 var datasourceItem: Any? {
+	var datasourceItem: (key: ExtendedInfo, value: String)! {
 		didSet {
-//			guard let detail = datasourceItem as? [ExtendedInfo : String] else { return }
-//
-//			for (key, value) in detail {
-//				let attributedText = NSMutableAttributedString.setupWithText(key.stringValue, description: "\n\(value)",
-//					textFont: UIFont.systemFont(ofSize: 14),
-//					descriptionFont: UIFont.systemFont(ofSize: 28),
-//					textColor: UIColor.weatherSemiTransparent(),
-//					descriptionColor: .white)
-//				attributedText?.setLineSpacing(1.0)
-//				extendedInfoTextView.attributedText = attributedText
-//			}
+			guard let _ = self.datasourceItem else { return }
+			self.setupViews()
+			let key = self.datasourceItem.key
+			let value = self.datasourceItem.value
+			
+			let attributedText = NSMutableAttributedString.setupWithText(key.stringValue, description: "\n\(value)",
+				textFont: UIFont.systemFont(ofSize: 14),
+				descriptionFont: UIFont.systemFont(ofSize: 28),
+				textColor: UIColor.App.transparentWhite.value,
+				descriptionColor: .white)
+			attributedText?.setLineSpacing(1.0)
+			self.extendedInfoTextView.attributedText = attributedText
 		}
 	}
 	
-	 func setupViews() {
+	
+	// MARK: - Methods Setup -
+	
+	func setupViews() {
 		self.addSubview(self.extendedInfoTextView)
 		self.addSubview(self.separatorLineView)
 		self.extendedInfoTextView.fillSuperview()
-		self.separatorLineView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+		_ = self.separatorLineView.anchor(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0.5)
+		self.separatorLineView.backgroundColor = UIColor.App.transparentWhite.value
 		self.separatorLineView.isHidden = false
+		
 	}
 }
 

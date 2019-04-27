@@ -22,6 +22,6 @@ class WhiteLabel: UILabel {
 	}
 	
 	private func setupColor() {
-		self.textColor = UIColor.white.withAlphaComponent(0.8)
+		self.textColor = UIColor.App.dirtyWhite.value
 	}
 }
